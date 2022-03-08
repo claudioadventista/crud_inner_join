@@ -239,7 +239,7 @@ if((isset($_POST['data']))AND($_POST['data']<>"")){
                                     <td class="td tdCenter"><?php if($linha['dataSaida']<>'0000-00-00'){echo date("d/m/Y", strtotime($linha['dataSaida']));} ?></td>                        
                                     <td class="td tdCenter"><?php echo $linha['barra']; ?></td>
                                     <td >
-                                        <span class="botao but-azul" onclick="buscaCad.value='<?php echo $linha['id']; ?>'; buscaNoBanco3(); ocultaBotão()" >Ver</span>   
+                                        <span class="botao but-azul" onclick="buscaCad.value='<?php echo $linha['barra']; ?>'; buscaNoBanco3(); ocultaBotão()" >Ver</span>   
                                     </td>
                                 </tr>
                         <?php };?>
@@ -294,17 +294,17 @@ if((isset($_POST['data']))AND($_POST['data']<>"")){
             // Permite alterar o CPF do cliente
             function buscaNoBanco5(){
                 let texto = document.getElementById('cpf2Cliente').value;
-                fetch('http://localhost:80/inner_join_mysql_tres_tabelas/buscaCadastro.php?buscaCad=' + texto)
+                
+                fetch('http://localhost:80/inner_join_mysql_tres_tabelas/buscaCadastro.php?buscaCPF=' + texto)
                 .then(response => {// retorna a requisição fetch
                     if (response.ok) {// se reornar ok
                     return response.json();// converte num objeto json
-                    
                     }
                 })
 
                 .then(json => {
-                    if(json =="CPF já é cadastrado"){
-                        alert("CPF já é cadastrado");
+                    if (json > 0){
+                        alert("CPF já cadastrado");
                     }else{
                         submitCadastro.disabled ="";
                         submitCadastro2.disabled ="";
@@ -317,7 +317,7 @@ if((isset($_POST['data']))AND($_POST['data']<>"")){
                         submitCadastro.style.cursor ="pointer";
                         submitCadastro2.style.cursor ="pointer";
                         cpf2Cliente.style.background ="#fff";
-                        cpf2Cliente.style.color ="#000";
+                        cpf2Cliente.style.color ="#000";            
                      };   
                 })
 
