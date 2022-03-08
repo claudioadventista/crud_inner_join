@@ -1,7 +1,7 @@
 <script>
     // -------------------------------- Tratamento para validação do Cpf ------------------------------
                 
-    // valida cpf
+    // VERIFICA E VALIDA O CPF DIGITADO NO CAMPO CPF
     function isValidCPF(cpf) {
         if (typeof cpf !== 'string') return false
         if (cpf == "12345678909") return false
@@ -21,9 +21,9 @@
         return !(rest(10,2) !== validator[0] || rest(11,1) !== validator[1])
     }
 
-    
- // Página index.php, Campo - Digite para buscar o cadastro
-        // Preenche o formulario para alteração
+   
+        // ESSA FUNÇÃO USA NA PÁGINA index.ph E NÁ PÁGINA duplicado.php, 
+        // E PREENCHE O FORMULÁRIO PARA ALTERAÇÃO E VISUALIZAÇÃO DE CADASTRO
         function buscaNoBanco3(){
             let texto = document.getElementById('buscaCad').value;
             fetch('http://localhost:80/inner_join_mysql_tres_tabelas/buscaCadastro.php?busca=' + texto)
@@ -36,6 +36,8 @@
             .then(json => {
                 if(json == "zero"){
                 alert("nada encontrado");
+                buscaCad.value="";
+                buscaCad.focus();
                 }else if(json == "mais_de_um"){
                     alert("Mais de uma O.S encontrada");
                 }else{
@@ -83,70 +85,8 @@
                 alert("erro ao tentar alterar");
             });  
         };
-
-     
-
-    function desabilitaCampos(){
-        ordemServico.disabled = 'true';
-        nome.disabled = 'true';
-        dtNascimento.disabled = 'true';
-        dtCadCliente.disabled = 'true';
-        dtEntrada.disabled = 'true';
-       // defeito.disabled = 'true';
-        acessorio.disabled = 'true';
-        select_aparelho.disabled = 'true';
-        select_marca.disabled = 'true';
-        select_defeito.disabled = 'true';
-        novoAparelho.disabled = 'true';
-        novaMarca.disabled = 'true';
-        novoDefeito.disabled = 'true';
-        document.getElementById("form-cadastro").innerHTML="alterar cadastro";
-    };
-
-    function desabilitaExistente(){
-        if(cpf2.value!=""){
-            //cpf2.disabled = 'true';
-        };
-        cpf.disabled = 'true';
-        nome.disabled = 'true';
-        dtNascimento.disabled = 'true';
-        dtCadCliente.disabled = 'true';
-    };
-
-    function reabilitaCampos(){
-        ordemServico.disabled = '';
-        //cpf2.disabled = '';
-        cpf.disabled = '';
-        cpf.value='';
-        cpf.style.background = "#fff";
-        cpf.style.color = "#000";
-        cpf2.style.background = "#fff";
-        cpf2.style.color = "#000";
-        nome.disabled = '';
-        dtNascimento.disabled = '';
-        dtCadCliente.disabled = '';
-        dtEntrada.disabled = '';
-      //  defeito.disabled = '';
-        acessorio.disabled = '';
-        buscaCad.value='';
-        id_aparelho.value='';
-        id_aparelho.text='';
-        id_marca.value='';
-        id_marca.text='';
-        id_estado.value='';
-        id_estado.text='';
-        id_defeito.value='';
-        id_defeito.text='';
-        select_aparelho.disabled = '';
-        select_marca.disabled = '';
-        select_defeito.disabled = '';
-        novoAparelho.disabled = '';
-        novaMarca.disabled = '';
-        novoDefeito.disabled = '';
-    };
-
-    // Página - formulario.php
-    // limpa e reabilita os campos do formulário
+    
+    // LIMPA E REABILITA OS CAMPOS DO FORMULÁRIO
     function retornar(){
         // limpa todos os campos do formulário
         submitCadastro.disabled ="";
@@ -165,7 +105,7 @@
         return false;
     };
  
-    // mascar de telefone 
+    // MÁSCARA DO TELEFONE
     /* Máscaras ER */
     function mascara(o,f){
         v_obj=o
@@ -194,7 +134,7 @@
         }
     }
 
-    // função que valida o formulário
+    // FUNÇÃO QUE VALIDA O FORMULÁRIO
     function validaForm(){
         if(ordemServico.value==""){
             alert("campo O.S. em branco");
@@ -239,6 +179,7 @@
         };
     };  
 
+    // VALIDA OS CAMPOS DE ENTRADA DA PÁGINA duplicado.php
     function valida(){
                 // retira os espaços para comparar o valor digitado
                 if( cpfbusca.value.trim()==""){
